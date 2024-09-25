@@ -1,0 +1,1 @@
+yara -N -C -w -r -a 00_all.yc %1
