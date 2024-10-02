@@ -13,9 +13,11 @@ Official documentation: https://yara.readthedocs.io/en/latest/
 ### For Windows run the batch file from the command prompt like this:
 (The file with compiled rules is a batch file to avoid problems related to running powershell scripts, with a hardcoded compiled yara rules' file)
 
-***yarascanner.bat file/path/PID***
+***yarascanner.bat file|path|PID***
 
-Example: **yarascanner.bat C:\Users\dorian\31337.dll**
+Example: **yarascanner.bat C:\Users\user\31337.dll**
+
+(make sure the binary name & path are correct inside of the `yarascanner.bat` file!)
 
 ***
 
@@ -25,7 +27,7 @@ yara [OPTION]... [NAMESPACE:]RULES_FILE... FILE | DIR | PID
 
 Example:
 
-***yara -N -C -w -r -a 00_all.yc /Users/dorian/***
+***yara -N -C -w -r 00_all.yc /Users/user/***
 
 ***
 Which is, accordingly: 
@@ -36,6 +38,7 @@ Which is, accordingly:
 
 Other options such as maximum file size to scan, number of threads or a fast scan can be adjusted - check the --help switch
 
+Feel free to filter out unwanted results from the output, such as the rule showing `PE_File`s
 
 ## Rule compilation
 To make the proces simpler, faster and more effective, thousands of rules are compiled dynamically into a single file within **Makefile**, where rule repos' sources are defined. 
@@ -48,22 +51,24 @@ I tried to bring **False Positives** down to an absolute minimum, adjusting **bo
 
 
 ```
-hacktool_multi_ntlmrelayx /Users/dorian//Library/Python/3.9/lib/python/site-packages/impacket/examples/ntlmrelayx/attacks/smbattack.py
+hacktool_multi_ntlmrelayx /Users/user//Library/Python/3.9/lib/python/site-packages/impacket/examples/ntlmrelayx/attacks/smbattack.py
 
-crypto_vertical_transposition_wide /Users/dorian//Library/Python/3.9/lib/python/site-packages/cryptography/hazmat/bindings/_rust.abi3.so
+crypto_vertical_transposition_wide /Users/user//Library/Python/3.9/lib/python/site-packages/cryptography/hazmat/bindings/_rust.abi3.so
 
-crypto_LM_DES /Users/dorian//Library/Python/3.9/lib/python/site-packages/spnego/_ntlm_raw/crypto.py
+crypto_LM_DES /Users/user//Library/Python/3.9/lib/python/site-packages/spnego/_ntlm_raw/crypto.py
 
-hacktool_multi_ntlmrelayx /Users/dorian//Library/Python/3.9/lib/python/site-packages/impacket/examples/ntlmrelayx/attacks/ldapattack.py
+hacktool_multi_ntlmrelayx /Users/user//Library/Python/3.9/lib/python/site-packages/impacket/examples/ntlmrelayx/attacks/ldapattack.py
 
-VULN_KeePass_DB_Brute_Forcible /Users/dorian//wedo/exfil/KeePass/Ixxxxx.kdb
+VULN_KeePass_DB_Brute_Forcible /Users/user//exfil/KeePass/Ixxxxx.kdb
 
-executable_elf64 /Users/dorian//Library/Python/3.9/lib/python/site-packages/tkinterdnd2/tkdnd/linux64/libtkdnd2.9.2.so
+executable_elf64 /Users/user//Library/Python/3.9/lib/python/site-packages/tkinterdnd2/tkdnd/linux64/libtkdnd2.9.2.so
 
-executable_pe /Users/dorian//Library/Python/3.9/lib/python/site-packages/tkinterdnd2/tkdnd/win64/libtkdnd2.9.2.dll
+executable_pe /Users/user//Library/Python/3.9/lib/python/site-packages/tkinterdnd2/tkdnd/win64/libtkdnd2.9.2.dll
 ```
 
 ## Probl— Challenges
 
 YARA doesn't like and cannot compile duplicated rules. If you encounter one, the **name of the rule within the file** must be changed (or removed altogether) and **NOT** just the filename
+
+In the near future, expect minor changes to `Makefile`, repos and new tools added
 

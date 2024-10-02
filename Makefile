@@ -2,12 +2,11 @@
 
 rules := $(wildcard *.yara)
 
-repo1 = https://github.com/h3x2b/yara-rules.git
-repo2 = https://github.com/Neo23x0/signature-base.git
-repo3 = https://github.com/InQuest/yara-rules.git
-repo4 = https://github.com/reversinglabs/reversinglabs-yara-rules.git
+repo1 = https://github.com/Neo23x0/signature-base.git
+repo2 = https://github.com/InQuest/yara-rules.git
+repo3 = https://github.com/reversinglabs/reversinglabs-yara-rules.git
 
-repos := repo1 repo2 repo3 repo4
+repos := repo1 repo2 repo3
 
 repos-dir := ./_repos
 
