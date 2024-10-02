@@ -68,7 +68,8 @@ executable_pe /Users/user//Library/Python/3.9/lib/python/site-packages/tkinterdn
 
 ## Probl— Challenges
 
-YARA doesn't like and cannot compile duplicated rules. If you encounter one, the **name of the rule within the file** must be changed (or removed altogether) and **NOT** just the filename
+* YARA doesn't like and cannot compile duplicated rules. If you encounter one, the **name of the rule within the file** must be changed (or removed altogether) and **NOT** just the filename
 
-In the near future, expect minor changes to `Makefile`, repos and new tools added
+* Yara's compiled rules MUST be compiled by the same version of Yarac (even the `minor` version number of the rule compiler matters)
 
+* In the near future, expect minor changes to `Makefile`, repos and new tools added
