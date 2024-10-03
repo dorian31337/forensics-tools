@@ -11,13 +11,17 @@ Official documentation: https://yara.readthedocs.io/en/latest/
 ## Usage:
 
 ### For Windows run the batch file from the command prompt like this:
-(The file with compiled rules is a batch file to avoid problems related to running powershell scripts, with a hardcoded compiled yara rules' file)
+The file with compiled rules is a batch file to avoid problems related to running powershell scripts, with a hardcoded compiled yara rules' file.
+
+The way of starting the scan is simple, open the terminal where the `yarascanner.bat`, compiled rules (`*.yc`) and the `yara` binary is (if not added to $PATH) and type the following:
 
 ***yarascanner.bat file|path|PID***
 
 Example: **yarascanner.bat C:\Users\user\31337.dll**
 
 (make sure the binary name & path are correct inside of the `yarascanner.bat` file!)
+
+In case of problems check the "good to know" section.
 
 ***
 
@@ -47,7 +51,9 @@ Then, the results are stripped from duplicates and a command `yarac all_rules.ya
 
 
 ## Good to know: 
-I tried to bring **False Positives** down to an absolute minimum, adjusting **both** yara and XDR rules, however it is not entirely possible to avoid them. Examples of such results will be i.e.: PE/ELF64 files on MacOS, Penetration testing tools, legacy, possibly vulnerable apps & files  such as KeePass - use BitWarden instead (***However be warned - as you can see below, XDR does NOT always flag malicious script files, thus you always need verify the results manually***).
+* I tried to bring **False Positives** down to an absolute minimum, adjusting **both** yara and XDR rules, however it is not entirely possible to avoid them. Examples of such results will be i.e.: PE/ELF64 files on MacOS, Penetration testing tools, legacy, possibly vulnerable apps & files  such as KeePass - use BitWarden instead (***However be warned - as you can see below, XDR does NOT always flag malicious script files, thus you always need verify the results manually***).
+
+* (`Error 34, "unknown module"` will occur far more often on Windows than on Unix systems for an unknown reason related to module imports. Therefore, it is recommended to run Yara from *nix where possible, however I'll try my best to keep the rule composition as compatible as possible)
 
 
 ```
@@ -70,6 +76,6 @@ executable_pe /Users/user//Library/Python/3.9/lib/python/site-packages/tkinterdn
 
 * YARA doesn't like and cannot compile duplicated rules. If you encounter one, the **name of the rule within the file** must be changed (or removed altogether) and **NOT** just the filename
 
-* Yara's compiled rules MUST be compiled by the same version of Yarac (even the `minor` version number of the rule compiler matters)
+* Yara's compiled rules MUST be compiled by the same version of Yarac (even the `minor` version number of the rule compiler matters). 
 
 * In the near future, expect minor changes to `Makefile`, repos and new tools added
